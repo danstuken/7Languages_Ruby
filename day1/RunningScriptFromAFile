@@ -1,0 +1,14 @@
+As a first attempt at this I went with standard unix practice:
+
+Script started on Mon 13 Jun 2011 06:27:44 PM BST
+[dan@home day1]$ which ruby
+/usr/bin/ruby
+[dan@home day1]$ echo '#!/usr/bin/ruby' > test1.rb
+[dan@home day1]$ echo 'puts "hello world"' >> test1.rb
+[dan@home day1]$ chmod +x ./test1.rb
+[dan@home day1]$ ./test1.rb
+hello world
+Script done on Mon 13 Jun 2011 06:28:52 PM BST
+
+Cool, so this works. Quick google required to see if there's an official way
+of doing this. Yay! it is. Rock on.
