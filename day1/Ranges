@@ -1,6 +1,9 @@
 A ruby range is a sequence containing all values from and including a start
 value up to and optionally including an end value.
 
+The core api docs for ranges can be found here:
+http://www.ruby-doc.org/core/classes/Range.html
+
 Some examples:
 
 (1)
@@ -57,3 +60,4 @@ parameter is false, as the end value is still included in the range.
 (4)
  Setting the optional third constructor parameter to true has excluded the end
 value from the range.
+
