@@ -1,5 +1,17 @@
-Code for the ruby exercises for 7 Languages in 7 Weeks.
+Code and notes for the ruby exercises for 7 Languages in 7 Weeks.
 
 Feel free to abuse as you see fit.
+
+The version of ruby I have installed on my machine is 1.8.7. There are some
+differences between this version and version 1.9. Where possible (and I know
+about it <--- still learning :)) I will flag any differences in the notes.
+
+Useful linky:
+http://www.ruby-doc.org/core/  (for current version - 1.9 at time of writing)
+http://www.ruby-doc.org/core-1.8.7/
+http://www.ruby-doc.org/docs/ProgrammingRuby/
+http://www.ruby-doc.org/bookstore/
+http://www.devx.com/RubySpecialReport/Article/34502 (10 mins to your first app)
+
 
 Dan Kendall 06/2011
