@@ -7,23 +7,25 @@
 
 module SlicePrint
 
-   def put_slice(block_size)
+   def put_slice(slice_size)
       count = 0;
       each do |element|
          print "#{element}"
          count += 1  ##am i forming a closure here? do I need to be careful of anything?
-         puts if count % block_size == 0
+         puts if count % slice_size == 0
       end
    end
 
-   def put_slice(options = {})
-      options[:block_size] = 4 if options[:block_size] == nil
-      options[:operation] = do |slice|
-         puts slice.join(' ')
-      end if options[:operation] == nil
+   def slice_op(slice_size)
+      slice = []
+      each do |element|
+         slice.push element
+         if slice.count == slice_size 
+            yield slice
+            slice = []
+         end
+      end
    end
-
-   
 
 end
 
@@ -43,4 +45,9 @@ puts
 
 puts "Thirdly"
 source_array.put_slice 5
+puts
+
+puts
+puts "Fourthly"
+source_array.slice_op(4) { |slice| puts slice.join(' ') }
 puts
