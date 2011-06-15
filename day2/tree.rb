@@ -11,7 +11,11 @@ module HashTree
    end
 
    def children
-      values[0]
+      children_list = []
+      values[0].each_pair do |k,v|
+         children_list.push({k => v})
+      end
+      children_list
    end
 
    def visit(&block)
@@ -20,7 +24,7 @@ module HashTree
 
    def visit_all(&block)
       visit &block
-      children.values { |child| child.visit_all &block }
+      children.each { |child| child.visit_all &block }
    end
 end
 
