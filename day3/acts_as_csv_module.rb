@@ -1,11 +1,5 @@
-#---
-# Excerpted from "Seven Languages in Seven Weeks",
-# published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material, 
-# courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose. 
-# Visit http://www.pragmaticprogrammer.com/titles/btlang for more book information.
-#---
+#!/usr/bin/ruby
+
 module ActsAsCsv
   
   def self.included(base)
@@ -20,25 +14,53 @@ module ActsAsCsv
   
   module InstanceMethods
     
-    def read
-      @csv_contents = []
-      filename = self.class.to_s.downcase + '.txt'
-      file = File.new(filename)
-      @headers = file.gets.chomp.split(', ')
-
-      file.each do |row|
-        @csv_contents << row.chomp.split(', ')
+    def prepare
+      @filename = self.class.to_s.downcase + '.txt'
+      File.open(@filename) do |csv_file|
+         @headers = csv_file.gets.chomp.split(', ')
       end
     end
+
+    def _read_headers
+    end
+
+    def each
+       File.open(@filename) do |csv_file|
+          csv_file.gets #skip headers
+          csv_file.each do |row|
+             yield CsvRow.new(@headers, row.chomp.split(', '))
+          end
+       end
+    end
     
-    attr_accessor :headers, :csv_contents
+    attr_accessor :headers
+    attr :filename
     
     def initialize
-      read 
+      prepare 
     end
 
   end
 
+end
+
+class CsvRow
+
+   attr :row_data
+
+   def initialize(headers, row)
+      @row_data = {}
+      
+      i = 0
+      headers.each do |header| 
+         @row_data[header] = row[i]
+         i += 1
+      end
+   end
+
+   def method_missing name, *args
+      @row_data[name.to_s] 
+   end
 end
 
 class RubyCsv  # no inheritance! You can mix it in
@@ -48,5 +70,8 @@ end
 
 m = RubyCsv.new
 puts m.headers.inspect
-puts m.csv_contents.inspect
-
+m.each do |csvrow|
+   puts "one: #{csvrow.one}"
+   puts "two: #{csvrow.two}"
+   puts "three: #{csvrow.three}"
+end
